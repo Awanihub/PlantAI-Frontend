@@ -1,0 +1,4 @@
+ss700683_db_user
+M15eypZYmNKMnobI
+mongodb+srv://<db_username>:<db_password>@cluster0.j0atdh8.mongodb.net/
+mongodb+srv://<ss700683_db_user>:<M15eypZYmNKMnobI>@cluster0.j0atdh8.mongodb.net/

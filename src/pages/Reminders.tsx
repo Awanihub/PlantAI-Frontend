@@ -1,0 +1,206 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, Plus, Droplets, Trash2, Check, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+
+const Reminders = () => {
+  const { toast } = useToast();
+  const [reminders, setReminders] = useState([
+    { id: 1, plant: "Monstera Deliciosa", action: "Water", due: "Today", completed: false },
+    { id: 2, plant: "Snake Plant", action: "Water", due: "Tomorrow", completed: false },
+    { id: 3, plant: "Pothos", action: "Fertilize", due: "In 3 days", completed: false },
+  ]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newPlant, setNewPlant] = useState("");
+  const [newAction, setNewAction] = useState("");
+  const [newDue, setNewDue] = useState("Today");
+
+  const handleComplete = (id: number) => {
+    setReminders(reminders.map(r => 
+      r.id === id ? { ...r, completed: !r.completed } : r
+    ));
+    toast({
+      title: "Reminder updated! ✅",
+      description: "Great job taking care of your plants!",
+    });
+  };
+
+  const handleDelete = (id: number) => {
+    setReminders(reminders.filter(r => r.id !== id));
+    toast({
+      title: "Reminder deleted",
+      description: "The reminder has been removed.",
+    });
+  };
+
+  const handleAddReminder = () => {
+    if (!newPlant || !newAction || !newDue) return;
+
+    const newReminder = {
+      id: Date.now(),
+      plant: newPlant,
+      action: newAction,
+      due: newDue,
+      completed: false,
+    };
+
+    setReminders([newReminder, ...reminders]);
+    toast({
+      title: "Reminder added ✅",
+      description: `Added ${newAction} for ${newPlant} (${newDue})`,
+    });
+
+    // Reset modal fields
+    setNewPlant("");
+    setNewAction("");
+    setNewDue("Today");
+    setIsModalOpen(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-8">
+      {/* Header */}
+      <header className="bg-primary-dark text-primary-foreground p-6 rounded-b-3xl shadow-md mb-6">
+        <div className="container mx-auto">
+          <Link to="/dashboard" className="inline-flex items-center text-sm mb-4 hover:opacity-80 transition-opacity">
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            Back to Garden
+          </Link>
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            <Droplets className="w-6 h-6" />
+            Plant Care Reminders
+          </h1>
+          <p className="text-primary-foreground/80 text-sm mt-1">Never forget to care for your plants</p>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 space-y-6">
+        {/* Add Reminder Button */}
+        <Button onClick={() => setIsModalOpen(true)} className="w-full h-12 gap-2 animate-fade-in">
+          <Plus className="w-5 h-5" />
+          Add New Reminder
+        </Button>
+
+        {/* Reminders List */}
+        <div className="space-y-3">
+          {reminders.map((reminder, index) => (
+            <Card
+              key={reminder.id}
+              className={`p-4 border-border animate-fade-in ${
+                reminder.completed ? "opacity-60" : ""
+              }`}
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => handleComplete(reminder.id)}
+                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
+                    reminder.completed
+                      ? "bg-primary border-primary"
+                      : "border-muted-foreground hover:border-primary"
+                  }`}
+                >
+                  {reminder.completed && <Check className="w-4 h-4 text-primary-foreground" />}
+                </button>
+
+                <div className="flex-1">
+                  <h3 className={`font-semibold ${reminder.completed ? "line-through text-muted-foreground" : "text-card-foreground"}`}>
+                    {reminder.action} {reminder.plant}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Droplets className="w-3 h-3 text-primary" />
+                    <p className="text-sm text-muted-foreground">{reminder.due}</p>
+                  </div>
+                </div>
+
+                <Badge variant={reminder.due === "Today" ? "default" : "secondary"}>
+                  {reminder.due}
+                </Badge>
+
+                <button
+                  onClick={() => handleDelete(reminder.id)}
+                  className="text-destructive hover:bg-destructive/10 p-2 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <Card className="p-6 w-11/12 max-w-md relative animate-slide-up">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-destructive"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <h2 className="text-xl font-semibold mb-4">Add New Reminder</h2>
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Plant Name"
+                  value={newPlant}
+                  onChange={(e) => setNewPlant(e.target.value)}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-primary/50"
+                />
+                <input
+                  type="text"
+                  placeholder="Action (Water, Fertilize, etc.)"
+                  value={newAction}
+                  onChange={(e) => setNewAction(e.target.value)}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-primary/50"
+                />
+                <select
+                  value={newDue}
+                  onChange={(e) => setNewDue(e.target.value)}
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-primary/50"
+                >
+                  <option>Today</option>
+                  <option>Tomorrow</option>
+                  <option>In 3 days</option>
+                  <option>Next week</option>
+                </select>
+                <Button onClick={handleAddReminder} className="w-full">
+                  Add Reminder
+                </Button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Tips */}
+        <Card className="p-6 bg-card/50 backdrop-blur-sm border-border animate-slide-up">
+          <h3 className="font-semibold mb-3 text-card-foreground">Reminder Tips</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2">
+              <span className="text-primary">•</span>
+              <span>Set reminders based on each plant's specific needs</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary">•</span>
+              <span>Check soil moisture before watering, even with reminders</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary">•</span>
+              <span>Adjust frequency based on season and environment</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary">•</span>
+              <span>Enable notifications to never miss a care task</span>
+            </li>
+          </ul>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default Reminders;
