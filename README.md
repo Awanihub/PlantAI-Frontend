@@ -1,73 +1,236 @@
-# Welcome to your Lovable project
+# 🌿 PlantAI - AI Powered Plant Identification & Care Assistant
 
-## Project info
+PlantAI is a full-stack web application that helps users identify plants from images using Google Gemini AI. After identifying a plant, users can view plant details, care instructions, and interact with an AI chatbot to ask plant-related questions.
 
-**URL**: https://lovable.dev/projects/d48159d0-e3c3-46ce-8685-d8416e22a8bc
+---
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+- 🌱 AI-based Plant Identification
+- 📸 Upload image or capture from camera
+- 🤖 Google Gemini AI integration
+- 💧 Plant care recommendations
+- ☀️ Sunlight requirements
+- 🌾 Fertilizer suggestions
+- ⚠️ Common plant problems
+- 💬 AI Plant Chat Assistant
+- 🔒 JWT Authentication
+- 👤 User Login & Registration
+- 🗄 MongoDB Database
+- ⏳ Automatic deletion of plant scans after 24 hours
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d48159d0-e3c3-46ce-8685-d8416e22a8bc) and start prompting.
+## 🛠 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+### Frontend
 
-**Use your preferred IDE**
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Shadcn UI
+- React Router
+- Lucide Icons
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Backend
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- Multer
 
-Follow these steps:
+### AI
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Google Gemini 2.5 Flash API
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 📁 Project Structure
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```
+PlantAI/
+│
+├── Frontend/
+│   ├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   └── App.tsx
+│
+├── Backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   ├── middlewares/
+│   ├── models/
+│   ├── validators/
+│   └── server.ts
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/yourusername/PlantAI.git
+```
+
+---
+
+### Backend Setup
+
+```bash
+cd Backend
+npm install
+```
+
+Create a `.env` file
+
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret
+
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+Run backend
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Frontend Setup
 
-**Use GitHub Codespaces**
+```bash
+cd Frontend
+npm install
+npm run dev
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Frontend runs at
 
-## What technologies are used for this project?
+```
+http://localhost:8080
+```
 
-This project is built with:
+Backend runs at
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+http://localhost:5000
+```
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/d48159d0-e3c3-46ce-8685-d8416e22a8bc) and click on Share -> Publish.
+## 📸 Application Flow
 
-## Can I connect a custom domain to my Lovable project?
+```
+User Login
+      │
+      ▼
+Upload Plant Image
+      │
+      ▼
+Backend receives image
+      │
+      ▼
+Gemini AI identifies plant
+      │
+      ▼
+Plant Details Page
+      │
+      ▼
+Ask questions using AI Chat
+      │
+      ▼
+Receive personalized plant care advice
+```
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📡 API Endpoints
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Authentication
+
+| Method | Endpoint |
+|----------|----------------|
+| POST | /api/auth/register |
+| POST | /api/auth/login |
+| POST | /api/auth/verify-otp |
+
+---
+
+### Plant
+
+| Method | Endpoint |
+|----------|----------------|
+| POST | /api/plant/identify |
+
+---
+
+### Chat
+
+| Method | Endpoint |
+|----------|----------------|
+| POST | /api/chat/ask |
+
+---
+
+### User
+
+| Method | Endpoint |
+|----------|----------------|
+| GET | /api/user/profile |
+
+---
+
+## 📷 Screens
+
+- Login Page
+- Register Page
+- Dashboard
+- Plant Identification
+- Plant Details
+- AI Chat
+
+---
+
+## 🔒 Security
+
+- JWT Authentication
+- Protected Routes
+- Image Validation
+- File Size Restriction
+- Secure Environment Variables
+
+---
+
+## 🚧 Future Improvements
+
+- Plant Disease Detection
+- Weather-based Plant Care
+- Plant Reminder Notifications
+- Save Favorite Plants
+- Scan History
+- Voice Assistant
+- Multi-language Support
+- Community Discussion Forum
+
+---
+
+## 👨‍💻 Author
+
+Awantika Singh
+Backend repository is separately in my repositories in future i will merge both frontend and backend repo.
