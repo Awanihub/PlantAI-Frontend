@@ -7,15 +7,14 @@ import React, {
 } from "react";
 
 interface User {
-  id: string;
-  name: string;
+  _id: string;
+  fullName: string;
   email: string;
 }
 
 interface AuthContextType {
-  user: User | null;
   token: string | null;
-  login: (data: { token: string; user: User }) => void;
+  login: (token: string) => void;
   logout: () => void;
 }
 
@@ -26,7 +25,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token")
+    localStorage.getItem("token"),
   );
 
   // ✅ On mount, check if we already have a token → fetch user
@@ -34,7 +33,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     const fetchProfile = async () => {
       if (!token) return;
       try {
-        const res = await fetch("http://localhost:8000/api/auth/profile", {
+        const res = await fetch("http://localhost:8000/api/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -48,10 +47,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   }, [token]);
 
   // ✅ Login (no navigation here)
-  const login = (data: { token: string; user: User }) => {
-    localStorage.setItem("token", data.token);
-    setToken(data.token);
-    setUser(data.user);
+  const login = (token: string) => {
+    localStorage.setItem("token", token);
+    setToken(token);
   };
 
   // ✅ Logout (no navigation here)
@@ -62,7 +60,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
@@ -71,6 +69,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 export const useAuth = (): AuthContextType => {
   const ctx = useContext(AuthContext);
   if (!ctx)
-    throw new Error("useAuth must be used within a BrowserRouter and AuthProvider");
+    throw new Error(
+      "useAuth must be used within a BrowserRouter and AuthProvider",
+    );
   return ctx;
 };

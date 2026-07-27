@@ -31,7 +31,7 @@ const SignUp = () => {
 
       if (data.success) {
         // ✅ Auto-login after signup
-        login(data);
+        login(data.token);
 
         toast({
           title: "Welcome to PlantID! 🌱",

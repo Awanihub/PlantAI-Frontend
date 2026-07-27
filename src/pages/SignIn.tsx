@@ -31,7 +31,7 @@ const SignIn = () => {
       const data = await res.json();
 
       if (data.success) {
-        login(data);
+        login(data.token);
         toast({
           title: "Welcome back! 🌿",
           description: "You've successfully signed in.",

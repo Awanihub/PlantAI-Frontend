@@ -17,6 +17,9 @@ import Learn from "./pages/Learn";
 import HealthCheck from "./pages/HealthCheck";
 import Reminders from "./pages/Reminders";
 import AutoRedirect from "./pages/AutoRedirect";
+import PlantChat from "./pages/PlantChat";
+import Garden from "./pages/Garden";
+
 
 const queryClient = new QueryClient();
 
@@ -44,6 +47,8 @@ const App = () => {
                 <Route path="/learn" element={<Learn />} />
                 <Route path="/health-check" element={<HealthCheck />} />
                 <Route path="/reminders" element={<Reminders />} />
+                <Route path="/plant-chat" element={<PlantChat />} />
+                <Route path="/garden" element={<Garden />} />
 
                 {/* Catch-all */}
                 <Route path="*" element={<AutoRedirect />} />

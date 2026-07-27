@@ -1,7 +1,8 @@
 // ForgotPassword.tsx
 import { useState, KeyboardEvent, ChangeEvent } from "react";
 
-const API = "/api/auth";
+const API =
+  "http://localhost:8000/api/auth";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface ForgotPasswordProps {
@@ -79,15 +80,15 @@ const Btn = ({ children, loading, onClick }: BtnProps) => (
 
 // ── Main Component ────────────────────────────────────────────────────────────
 export default function ForgotPassword({ onBackToLogin }: ForgotPasswordProps) {
-  const [step, setStep]             = useState<number>(1);
-  const [email, setEmail]           = useState<string>("");
-  const [otp, setOtp]               = useState<string>("");
-  const [newPassword, setNewPass]   = useState<string>("");
-  const [confirmPass, setConfirm]   = useState<string>("");
-  const [resetToken, setToken]      = useState<string>("");
-  const [loading, setLoading]       = useState<boolean>(false);
-  const [error, setError]           = useState<string>("");
-  const [success, setSuccess]       = useState<string>("");
+  const [step, setStep] = useState<number>(1);
+  const [email, setEmail] = useState<string>("");
+  const [otp, setOtp] = useState<string>("");
+  const [newPassword, setNewPass] = useState<string>("");
+  const [confirmPass, setConfirm] = useState<string>("");
+  const [resetToken, setToken] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const post = async (endpoint: string, body: Record<string, string>) => {
     const res = await fetch(`${API}${endpoint}`, {
@@ -103,7 +104,8 @@ export default function ForgotPassword({ onBackToLogin }: ForgotPasswordProps) {
   // Step 1 — Send OTP
   const handleSendOtp = async (): Promise<void> => {
     if (!email) return setError("Please enter your email");
-    setError(""); setLoading(true);
+    setError("");
+    setLoading(true);
     try {
       await post("/forgot-password", { email });
       setSuccess("OTP sent! Check your inbox.");
@@ -118,7 +120,8 @@ export default function ForgotPassword({ onBackToLogin }: ForgotPasswordProps) {
   // Step 2 — Verify OTP
   const handleVerifyOtp = async (): Promise<void> => {
     if (otp.length !== 6) return setError("Enter the 6-digit OTP");
-    setError(""); setLoading(true);
+    setError("");
+    setLoading(true);
     try {
       const data = await post("/verify-otp", { email, otp });
       setToken(data.resetToken);
@@ -133,12 +136,37 @@ export default function ForgotPassword({ onBackToLogin }: ForgotPasswordProps) {
 
   // Step 3 — Reset Password
   const handleReset = async (): Promise<void> => {
-    if (newPassword.length < 8) return setError("Password must be at least 8 characters");
-    if (newPassword !== confirmPass) return setError("Passwords do not match");
-    setError(""); setLoading(true);
+    if (newPassword.length < 8) {
+      return setError("Password must be at least 8 characters");
+    }
+
+    if (newPassword !== confirmPass) {
+      return setError("Passwords do not match");
+    }
+
+    setError("");
+    setLoading(true);
+
     try {
-      await post("/reset-password", { email, resetToken, newPassword });
+      const res = await fetch(`${API}/reset-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${resetToken}`,
+        },
+        body: JSON.stringify({
+          newPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Something went wrong");
+      }
+
       setSuccess("Password reset successfully! You can now log in.");
+
       setStep(4);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Something went wrong");
