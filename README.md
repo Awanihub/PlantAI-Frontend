@@ -1,236 +1,277 @@
-# 🌿 PlantAI - AI Powered Plant Identification & Care Assistant
+# 🌱 PlantAI Frontend
 
-PlantAI is a full-stack web application that helps users identify plants from images using Google Gemini AI. After identifying a plant, users can view plant details, care instructions, and interact with an AI chatbot to ask plant-related questions.
+PlantAI is an AI-powered plant care assistant frontend built using React and TypeScript.
 
----
+The application provides users with an interactive interface to identify plants using AI, manage their personal garden, create plant care reminders, learn about plant care, and communicate with an AI plant assistant.
 
-## 🚀 Features
-
-- 🌱 AI-based Plant Identification
-- 📸 Upload image or capture from camera
-- 🤖 Google Gemini AI integration
-- 💧 Plant care recommendations
-- ☀️ Sunlight requirements
-- 🌾 Fertilizer suggestions
-- ⚠️ Common plant problems
-- 💬 AI Plant Chat Assistant
-- 🔒 JWT Authentication
-- 👤 User Login & Registration
-- 🗄 MongoDB Database
-- ⏳ Automatic deletion of plant scans after 24 hours
+This repository contains only the frontend implementation.
 
 ---
 
-## 🛠 Tech Stack
+# 🚀 Features
 
-### Frontend
+## 🌿 AI Plant Identification
 
-- React
+Users can upload plant images and get AI-generated plant information.
+
+Features:
+
+- Upload plant image
+- Preview uploaded image
+- Display AI identification results
+- Show:
+  - Plant name
+  - Scientific name
+  - Description
+  - Watering requirements
+  - Sunlight requirements
+  - Fertilizer suggestions
+  - Common problems
+  - Care instructions
+
+---
+
+## 🌱 Plant Details
+
+After identification, users can view detailed information about the plant.
+
+Includes:
+
+- Plant image
+- Scientific classification
+- Care requirements
+- AI-generated recommendations
+- Ask Plant AI feature
+
+---
+
+## 🌳 Personal Garden
+
+Users can manage their saved plants.
+
+Features:
+
+- View saved plants
+- Display plant information
+- Remove plants from garden
+
+---
+
+## ⏰ Plant Care Reminders
+
+Users can create and manage plant care reminders.
+
+Supported activities:
+
+- Watering
+- Fertilizing
+- Pruning
+- Repotting
+- Misting
+
+Features:
+
+- Add reminder
+- Mark reminder as completed
+- Delete reminder
+
+---
+
+## 🤖 Plant AI Chat
+
+Users can ask questions related to their plants.
+
+Examples:
+
+```
+How often should I water this plant?
+
+Why are my leaves turning yellow?
+
+Which fertilizer should I use?
+```
+
+---
+
+## 📚 Learn & Grow
+
+Educational section for improving plant knowledge.
+
+Topics include:
+
+- Plant care basics
+- Pest management
+- Pruning and propagation
+- Common plant problems
+
+Also includes AI-powered plant questions.
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend Technologies
+
+- React.js
 - TypeScript
 - Vite
 - Tailwind CSS
+- React Router DOM
 - Shadcn UI
-- React Router
-- Lucide Icons
-
-### Backend
-
-- Node.js
-- Express.js
-- TypeScript
-- MongoDB Atlas
-- Mongoose
-- JWT Authentication
-- Multer
-
-### AI
-
-- Google Gemini 2.5 Flash API
+- Lucide React Icons
 
 ---
 
-## 📁 Project Structure
+# 📂 Project Structure
 
 ```
-PlantAI/
+PlantAI-Frontend
 │
-├── Frontend/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── services/
-│   └── App.tsx
+├── src
+│   │
+│   ├── components
+│   │   └── UI Components
+│   │
+│   ├── pages
+│   │   ├── Dashboard.tsx
+│   │   ├── PlantIdentify.tsx
+│   │   ├── PlantDetails.tsx
+│   │   ├── Garden.tsx
+│   │   ├── Reminders.tsx
+│   │   ├── Learn.tsx
+│   │   ├── PlantChat.tsx
+│   │   ├── SignIn.tsx
+│   │   └── SignUp.tsx
+│   │
+│   ├── context
+│   │   └── AuthContext.tsx
+│   │
+│   ├── hooks
+│   │
+│   ├── App.tsx
+│   └── main.tsx
 │
-├── Backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── services/
-│   ├── middlewares/
-│   ├── models/
-│   ├── validators/
-│   └── server.ts
-│
-└── README.md
+└── package.json
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/PlantAI.git
+git clone https://github.com/Awanihub/PlantAI-Frontend.git
 ```
 
----
-
-### Backend Setup
+Navigate into project:
 
 ```bash
-cd Backend
+cd PlantAI-Frontend
+```
+
+Install dependencies:
+
+```bash
 npm install
 ```
 
-Create a `.env` file
+---
 
-```env
-PORT=5000
+# ▶️ Run Application
 
-MONGODB_URI=your_mongodb_connection_string
-
-JWT_SECRET=your_secret
-
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-Run backend
+Start development server:
 
 ```bash
 npm run dev
 ```
 
----
-
-### Frontend Setup
-
-```bash
-cd Frontend
-npm install
-npm run dev
-```
-
-Frontend runs at
+Application runs on:
 
 ```
-http://localhost:8080
-```
-
-Backend runs at
-
-```
-http://localhost:5000
+http://localhost:5173
 ```
 
 ---
 
-## 📸 Application Flow
+# 🔐 Authentication
+
+The frontend uses JWT-based authentication.
+
+Authentication flow:
 
 ```
 User Login
-      │
-      ▼
-Upload Plant Image
-      │
-      ▼
-Backend receives image
-      │
-      ▼
-Gemini AI identifies plant
-      │
-      ▼
-Plant Details Page
-      │
-      ▼
-Ask questions using AI Chat
-      │
-      ▼
-Receive personalized plant care advice
+     |
+     |
+Backend validates credentials
+     |
+     |
+JWT Token Generated
+     |
+     |
+Stored in Browser Local Storage
+     |
+     |
+Used for Protected API Requests
 ```
 
 ---
 
-## 📡 API Endpoints
+# 🔗 Backend Integration
 
-### Authentication
+Frontend communicates with the PlantAI backend through REST APIs.
 
-| Method | Endpoint |
-|----------|----------------|
-| POST | /api/auth/register |
-| POST | /api/auth/login |
-| POST | /api/auth/verify-otp |
+Backend Repository:
 
----
+```
+PlantAI-Backend
+```
 
-### Plant
+Main API features:
 
-| Method | Endpoint |
-|----------|----------------|
-| POST | /api/plant/identify |
-
----
-
-### Chat
-
-| Method | Endpoint |
-|----------|----------------|
-| POST | /api/chat/ask |
+- Authentication
+- Plant identification
+- Garden management
+- Reminder management
+- AI chat
+- Learning assistant
 
 ---
 
-### User
+# 🖼️ Screenshots
 
-| Method | Endpoint |
-|----------|----------------|
-| GET | /api/user/profile |
+(Add application screenshots here)
 
----
+Example:
 
-## 📷 Screens
-
-- Login Page
-- Register Page
-- Dashboard
-- Plant Identification
-- Plant Details
-- AI Chat
+```
+Dashboard
+Plant Identification
+Garden
+Reminders
+Learn Section
+```
 
 ---
 
-## 🔒 Security
+# 🌟 Future Improvements
 
-- JWT Authentication
-- Protected Routes
-- Image Validation
-- File Size Restriction
-- Secure Environment Variables
-
----
-
-## 🚧 Future Improvements
-
-- Plant Disease Detection
-- Weather-based Plant Care
-- Plant Reminder Notifications
-- Save Favorite Plants
-- Scan History
-- Voice Assistant
-- Multi-language Support
-- Community Discussion Forum
+- Mobile responsive improvements
+- Push notifications
+- Offline plant collection
+- Plant growth tracking UI
+- Weather-based plant recommendations
+- Dark mode improvements
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-Awantika Singh
-Backend repository is separately in my repositories in future i will merge both frontend and backend repo.
+**Awantika Singh**
+
+---
+
+## License
+
+This project is created for learning and development purposes.
