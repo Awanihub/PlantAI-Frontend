@@ -29,15 +29,12 @@ const PlantIdentify: React.FC = () => {
   const navigate = useNavigate();
 
 
-
-  // Open file picker
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };
 
 
 
-  // Handle image selection
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -69,8 +66,6 @@ const PlantIdentify: React.FC = () => {
 
 
 
-
-  // Call backend plant identification API
   const identifyPlant = async (
     file: File,
     previewImage: string
@@ -123,7 +118,6 @@ const PlantIdentify: React.FC = () => {
 
         const plantData: PlantData = {
 
-          // IMPORTANT: store scanId inside plant object
           scanId: data.scanId,
 
 

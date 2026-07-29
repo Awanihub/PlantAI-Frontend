@@ -24,7 +24,6 @@ const HealthCheck = () => {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Open file picker
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };

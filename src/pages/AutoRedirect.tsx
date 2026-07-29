@@ -11,7 +11,7 @@ const AutoRedirect = () => {
     else navigate("/", { replace: true });
   }, [token, navigate]);
 
-  return null; // nothing to render
+  return null; 
 };
 
 export default AutoRedirect;
