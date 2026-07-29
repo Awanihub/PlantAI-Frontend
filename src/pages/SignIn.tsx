@@ -22,7 +22,7 @@ const SignIn = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/auth/signin", {
+      const res = await fetch("https://plantai-backend-jumt.onrender.com/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

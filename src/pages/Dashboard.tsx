@@ -33,7 +33,7 @@ const Dashboard = () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:8000/api/garden",
+        "https://plantai-backend-jumt.onrender.com/api/garden",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ const Dashboard = () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:8000/api/garden/${id}`,
+        `https://plantai-backend-jumt.onrender.com/api/garden/${id}`,
         {
           method: "DELETE",
           headers: {

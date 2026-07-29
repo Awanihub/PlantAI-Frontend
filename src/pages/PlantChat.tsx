@@ -19,7 +19,7 @@ const PlantChat = () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:8000/api/chat/message",
+        "https://plantai-backend-jumt.onrender.com/api/chat/message",
         {
           method: "POST",
           headers: {

@@ -43,7 +43,7 @@ const fetchPlants = async () => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://localhost:8000/api/garden",
+      "https://plantai-backend-jumt.onrender.com/api/garden",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const fetchReminders = async () => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://localhost:8000/api/reminders",
+      "https://plantai-backend-jumt.onrender.com/api/reminders",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const fetchReminders = async () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:8000/api/reminders/${id}/complete`,
+        `https://plantai-backend-jumt.onrender.com/api/reminders/${id}/complete`,
         {
           method: "PATCH",
           headers: {
@@ -119,7 +119,7 @@ const fetchReminders = async () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:8000/api/reminders/${id}`,
+        `https://plantai-backend-jumt.onrender.com/api/reminders/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -155,7 +155,7 @@ const fetchReminders = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/api/reminders", {
+      const response = await fetch("https://plantai-backend-jumt.onrender.com/api/reminders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

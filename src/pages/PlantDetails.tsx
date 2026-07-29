@@ -50,7 +50,7 @@ const PlantDetails = () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:8000/api/chat/ask", // ✅ fixed: correct port + route
+        "https://plantai-backend-jumt.onrender.com/api/chat/ask", // ✅ fixed: correct port + route
         {
           method: "POST",
           headers: {
@@ -89,7 +89,7 @@ const PlantDetails = () => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:8000/api/garden/add", {
+    const response = await fetch("https://plantai-backend-jumt.onrender.com/api/garden/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

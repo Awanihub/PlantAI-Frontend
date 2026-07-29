@@ -20,7 +20,7 @@ const Garden = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/api/garden", {
+      const response = await fetch("https://plantai-backend-jumt.onrender.com/api/garden", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -48,7 +48,7 @@ const Garden = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:8000/api/garden/${id}`, {
+      const response = await fetch(`https://plantai-backend-jumt.onrender.com/api/garden/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ const Garden = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:8000/api/reminders", {
+      const response = await fetch("https://plantai-backend-jumt.onrender.com/api/reminders", {
         method: "POST",
 
         headers: {

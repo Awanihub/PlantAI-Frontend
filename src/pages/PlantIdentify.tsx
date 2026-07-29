@@ -89,7 +89,7 @@ const PlantIdentify: React.FC = () => {
 
 
       const response = await fetch(
-        "http://localhost:8000/api/plants/identify",
+        "https://plantai-backend-jumt.onrender.com/api/plants/identify",
         {
           method: "POST",
 

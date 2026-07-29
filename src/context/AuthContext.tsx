@@ -33,7 +33,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     const fetchProfile = async () => {
       if (!token) return;
       try {
-        const res = await fetch("http://localhost:8000/api/user/profile", {
+        const res = await fetch("https://plantai-backend-jumt.onrender.com/api/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

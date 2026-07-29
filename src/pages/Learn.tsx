@@ -142,7 +142,7 @@ Always identify the cause before treatment.
     try {
 
       const response = await fetch(
-        "http://localhost:8000/api/learn/ask",
+        "https://plantai-backend-jumt.onrender.com/api/learn/ask",
         {
           method:"POST",
           headers:{

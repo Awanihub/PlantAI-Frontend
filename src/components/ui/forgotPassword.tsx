@@ -2,7 +2,7 @@
 import { useState, KeyboardEvent, ChangeEvent } from "react";
 
 const API =
-  "http://localhost:8000/api/auth";
+  "https://plantai-backend-jumt.onrender.com/api/auth";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface ForgotPasswordProps {
